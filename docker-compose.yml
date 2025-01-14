@@ -13,6 +13,8 @@ services:
     mem_limit: 512mb
     ports:
       - "8888:8888"
+    env_file:
+      - ./GIT.env
     networks:
       - 'tienda-electrodomesticos'
 
