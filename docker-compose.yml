@@ -1,0 +1,93 @@
+
+services:
+  eureka-server:
+    build: eureka-server
+    mem_limit: 512m
+    ports:
+      - "8761:8761"
+    networks:
+      - 'tienda-electrodomesticos'
+
+  config-server:
+    build: config-server
+    mem_limit: 512mb
+    ports:
+      - "8888:8888"
+    networks:
+      - 'tienda-electrodomesticos'
+
+  api-gateway:
+    build: api-gateway
+    mem_limit: 512m
+    ports:
+      - "444:444"
+    networks:
+      - 'tienda-electrodomesticos'
+
+  producto-service:
+    build: producto-service
+    mem_limit: 512m
+    ports:
+      - "8081:8081"
+    environment:
+      DB_URL: jdbc:mysql://electrodomesticos:3306/serv_productos?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: 1234
+    restart: always
+    depends_on:
+      electrodomesticos:
+        condition: service_healthy
+    networks:
+      - 'tienda-electrodomesticos'
+
+  electrodomesticos:
+    image: mysql:8.0.33
+    ports:
+      - "3306-3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_PASSWORD: 1234
+    volumes:
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+    networks:
+      - 'tienda-electrodomesticos'
+
+  carrito-service:
+    build: carrito-service
+    mem_limit: 512m
+    ports:
+      - "8082:8082"
+    environment:
+      DB_URL: jdbc:mysql://electrodomesticos:3306/serv_carritos?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: 1234
+    restart: always
+    depends_on:
+      electrodomesticos:
+        condition: service_healthy
+    networks:
+      - 'tienda-electrodomesticos'
+
+  ventas-service:
+    build: ventas-service
+    mem_limit: 512m
+    ports:
+      - "8083:8083"
+    environment:
+      DB_URL: jdbc:mysql://electrodomesticos:3306/serv_ventas?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: 1234
+    restart: always
+    depends_on:
+      electrodomesticos:
+        condition: service_healthy
+    networks:
+      - 'tienda-electrodomesticos'
+
+networks:
+  tienda-electrodomesticos:
