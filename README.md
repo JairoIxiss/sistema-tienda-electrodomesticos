@@ -72,6 +72,7 @@ donde `{nombre-del-microservicio}` puede ser:
 1. `POST` /producto-service/productos/crear
 - **Descripción:** Crea un nuevo producto en la tienda.
 - **Body:**
+![Texto alternativo](./zrecursos/body-producto.png)
 - **Ejemplo de URL:** `localhost:444/producto-service/productos/crear`
 
 2. `GET` /producto-service/productos/traer
