@@ -53,8 +53,10 @@ Este es un proyecto basado en microservicios, desarrollado en Java, que simula u
 Todos los servicios están gestionados a través de un <strong>API Gateway</strong> que se ejecuta en <code>localhost:444</code>. Las URLs para interactuar con los microservicios siguen la siguiente estructura:
 </div>
 
-`localhost:444/{nombre-del-microservicio}/{endpoint}`
-
+<br>
+<code>localhost:444/{nombre-del-microservicio}/{endpoint}</code>
+<br>
+<br>
 
 donde `{nombre-del-microservicio}` puede ser:
 - `producto-service` para el microservicio de productos.
@@ -62,11 +64,15 @@ donde `{nombre-del-microservicio}` puede ser:
 - `ventas-service` para el microservicio de ventas.
 - `config-server` para entrar al config-server del sistema.
 
+<br>
+
 ### Config Server:
 - `GET` /config-server/{service}/default
 
   - **Descripción:** Obtiene la configuración del servicio especificado (por ejemplo, `carrito-service`).
   - **Ejemplo de URL:** `localhost:444/config-server/carrito-service/default`
+
+<br>
 
 ### Microservicio de Producto:
 1. `POST` /producto-service/productos/crear
@@ -75,14 +81,20 @@ donde `{nombre-del-microservicio}` puede ser:
 ![Body para crear producto](./zrecursos/body-producto.png)
 - **Ejemplo de URL:** `localhost:444/producto-service/productos/crear`
 
+<br>
+
 2. `GET` /producto-service/productos/traer
 - **Descripción:** Obtiene todos los productos disponibles en la tienda.
 - **Ejemplo de URL:** `localhost:444/producto-service/productos/traer`
+
+<br>
 
 3. `GET` /producto-service/productos/traer/{id}
 
 - **Descripción:** Obtiene los detalles de un producto específico mediante su código.
 - **Ejemplo de URL:** `localhost:444/producto-service/productos/traer/1` _(Reemplaza el "1" por el código del producto deseado)_
+
+<br>
 
 4. `PUT` /producto-service/productos/editar/{id}
 
@@ -91,10 +103,14 @@ donde `{nombre-del-microservicio}` puede ser:
 ![Body para editar producto](./zrecursos/body-producto-editar.png)
 - **Ejemplo de URL:** `localhost:444/producto-service/productos/editar/1` _(Reemplaza el "1" por el ID del producto)_
 
+<br>
+
 5. `DELETE` /producto-service/productos/borrar/{id}
 
 - **Descripción:** Elimina un producto de la tienda mediante su ID.
 - **Ejemplo de URL:** `localhost:444/producto-service/productos/borrar/1` _(Reemplaza el "1" por el ID del producto)_
+
+<br>
 
 ### Microservicio de Carrito:
 
@@ -105,15 +121,21 @@ donde `{nombre-del-microservicio}` puede ser:
 ![Body para crear carrito](./zrecursos/body-carrito.png)
 - **Ejemplo de URL:** `localhost:444/carrito-service/carrito/crear`
 
+<br>
+
 2. `GET` /carrito-service/carrito/traer-todos
 
 - **Descripción:** Obtiene todos los carritos de compras.
 - **Ejemplo de URL:** `localhost:444/carrito-service/carrito/traer-todos`
 
+<br>
+
 3. `GET`/carrito-service/carrito/traer/{id}
 
 - **Descripción:** Obtiene un carrito específico mediante su ID.
 - **Ejemplo de URL:** `localhost:444/carrito-service/carrito/traer/2` _(Reemplaza el "2" por el ID del carrito)_
+
+<br>
 
 4. `PUT` /carrito-service/carrito/editar/{id}
 
@@ -122,12 +144,16 @@ donde `{nombre-del-microservicio}` puede ser:
 ![Body para editar carrito](./zrecursos/body-carrito-editar.png)
 - **Ejemplo de URL:** `localhost:444/carrito-service/carrito/editar/1` _(Reemplaza el "1" por el ID del carrito)_
 
+<br>
+
 5. `DELETE` /carrito-service/carrito/borrar/{id}
 
 - **Descripción:** Elimina un carrito de compras mediante su ID.
 - **Ejemplo de URL:** `localhost:444/carrito-service/carrito/borrar/1` _(Reemplaza el "1" por el ID del carrito_
 
-###Microservicio de Ventas:
+<br>
+
+### Microservicio de Ventas:
 
 1. `POST` /ventas-service/ventas/crear
 
@@ -136,15 +162,21 @@ donde `{nombre-del-microservicio}` puede ser:
 ![Body para crear venta](./zrecursos/body-venta.png)
 - **Ejemplo de URL:** `localhost:444/ventas-service/ventas/crear`
 
+<br>
+
 2. `GET` /ventas-service/ventas/traer
 
 - **Descripción:** Obtiene todas las ventas realizadas.
 - **Ejemplo de URL:** `localhost:444/ventas-service/ventas/traer`
 
+<br>
+
 3. `GET` /ventas-service/ventas/traer/{id}
 
 - **Descripción:** Obtiene los detalles de una venta específica mediante su ID.
 - **Ejemplo de URL:** `localhost:444/ventas-service/ventas/traer/1` _(Reemplaza el "1" por el ID de la venta)_
+
+<br>
 
 4. `PUT` /ventas-service/ventas/editar/{id}
 
@@ -153,13 +185,40 @@ donde `{nombre-del-microservicio}` puede ser:
 ![Body para editar venta](./zrecursos/body-venta-editar.png)
 - **Ejemplo de URL:** `localhost:444/ventas-service/ventas/editar/1` _(Reemplaza el "1" por el ID de la venta)_
 
+<br>
+
 5. `DELETE` /ventas-service/ventas/borrar/{id}
 
 - **Descripción:** Elimina una venta mediante su ID.
 - **Ejemplo de URL:** `localhost:444/ventas-service/ventas/borrar/1` _(Reemplaza el "1" por el ID de la venta)_
+
+<br>
 
 ## Detalles Técnicos
 
 - **Escalabilidad:** El proyecto está preparado para escalar horizontalmente utilizando un balanceador de carga.
 - **Tolerancia a fallos:** Resilience4j está implementado para manejar caídas en los servicios con estrategias de Circuit Breaker y Retry.
 - **Centralización de Configuraciones:** Utilizamos Config Server para centralizar las configuraciones de los microservicios.
+
+<br>
+
+## Despliegue con Docker:
+<div align="justify">
+Este proyecto está configurado para ser desplegado utilizando Docker. Docker permite empaquetar la aplicación junto con todas sus dependencias en un contenedor, asegurando que la aplicación funcione de la misma manera en cualquier entorno (local o en la nube).
+</div>
+
+### Pasos para Ejecutar con Docker:
+
+1. Construye las imágenes de Docker para cada microservicio. Esto se puede hacer con el siguiente comando:
+
+`docker-compose build`
+
+2. Levanta los contenedores utilizando Docker Compose. Esto iniciará todos los microservicios definidos en el archivo docker-compose.yml.
+
+`docker-compose up`
+
+<div align="justify">
+El archivo 'docker-compose.yml' está configurado para ejecutar varios contenedores que representan cada microservicio. Como también la creación de cada base de datos que utiliza cada microservicio. 
+</div>
+
+
