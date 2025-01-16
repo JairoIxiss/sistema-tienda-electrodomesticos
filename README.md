@@ -53,13 +53,125 @@ Este es un proyecto basado en microservicios, desarrollado en Java, que simula u
 Todos los servicios están gestionados a través de un <strong>API Gateway</strong> que se ejecuta en <code>localhost:444</code>. Las URLs para interactuar con los microservicios siguen la siguiente estructura:
 </div>
 
-`System.out.println("Hola Mundo!");`
+`localhost:444/{nombre-del-microservicio}/{endpoint}`
 
 
-<p style="color: blue; background-color: white;">Este es un párrafo con fondo negro y texto blanco.</p>
+donde `{nombre-del-microservicio}` puede ser:
+- `producto-service` para el microservicio de productos.
+- `carrito-service` para el microservicio de carrito de compras.
+- `ventas-service` para el microservicio de ventas.
+- `config-server` para entrar al config-server del sistema.
 
+### Config Server:
+- `GET` /config-server/{service}/default
 
+  - **Descripción:** Obtiene la configuración del servicio especificado (por ejemplo, `carrito-service`).
+  - **Ejemplo de URL:** `localhost:444/config-server/carrito-service/default`
 
+### Microservicio de Producto:
+1. `POST` /producto-service/productos/crear
+- **Descripción:** Crea un nuevo producto en la tienda.
+- **Body:**
+- **Ejemplo de URL:** `localhost:444/producto-service/productos/crear`
 
+2. `GET` /producto-service/productos/traer
+- **Descripción:** Obtiene todos los productos disponibles en la tienda.
+- **Ejemplo de URL:** `localhost:444/producto-service/productos/traer`
+
+3. `GET` /producto-service/productos/traer/{id}
+
+- **Descripción:** Obtiene los detalles de un producto específico mediante su código.
+- **Ejemplo de URL:** `localhost:444/producto-service/productos/traer/2` _(Reemplaza el "2" por el código del producto deseado)_
+
+4. `PUT` /producto-service/productos/editar/{id}
+
+- **Descripción:** Edita los detalles de un producto existente.
+- **Body:**
+- **Ejemplo de URL:** `localhost:444/producto-service/productos/editar/1` _(Reemplaza el "1" por el ID del producto)_
+
+5. `DELETE` /producto-service/productos/borrar/{id}
+
+- **Descripción:** Elimina un producto de la tienda mediante su ID.
+- **Ejemplo de URL:** `localhost:444/producto-service/productos/borrar/1` _(Reemplaza el "1" por el ID del producto)_
+
+### Microservicio de Carrito:
+
+1. `POST` /carrito-service/carrito/crear
+
+- **Descripción:** Crea un carrito de compras con los productos seleccionados.
+- **Body:**
+json
+Copiar código
+{
+  "codigos": [1, 2]
+}
+- **Ejemplo de URL:** `localhost:444/carrito-service/carrito/crear`
+
+2. `GET` /carrito-service/carrito/traer-todos
+
+- **Descripción:** Obtiene todos los carritos de compras.
+- **Ejemplo de URL:** `localhost:444/carrito-service/carrito/traer-todos`
+
+3. `GET`/carrito-service/carrito/traer/{id}
+
+- **Descripción:** Obtiene un carrito específico mediante su ID.
+- **Ejemplo de URL:** `localhost:444/carrito-service/carrito/traer/2` _(Reemplaza el "2" por el ID del carrito)_
+
+4. `PUT` /carrito-service/carrito/editar/{id}
+
+- **Descripción:** Edita un carrito de compras existente.
+- **Body:**
+json
+Copiar código
+{
+  "codigos": [1]
+}
+- **Ejemplo de URL:** `localhost:444/carrito-service/carrito/editar/1` _(Reemplaza el "1" por el ID del carrito)_
+
+5. `DELETE` /carrito-service/carrito/borrar/{id}
+
+- **Descripción:** Elimina un carrito de compras mediante su ID.
+- **Ejemplo de URL:** `localhost:444/carrito-service/carrito/borrar/1` _(Reemplaza el "1" por el ID del carrito_
+
+###Microservicio de Ventas:
+
+1. `POST` /ventas-service/ventas/crear
+
+- **Descripción:** Crea una nueva venta, asociada a un carrito de compras.
+- **Body:**
+json
+Copiar código
+{
+  "fechaVenta": "2025-01-10",
+  "idCarrito": 1
+}
+- **Ejemplo de URL:** `localhost:444/ventas-service/ventas/crear`
+
+2. `GET` /ventas-service/ventas/traer
+
+- **Descripción:** Obtiene todas las ventas realizadas.
+- **Ejemplo de URL:** `localhost:444/ventas-service/ventas/traer`
+
+3. `GET` /ventas-service/ventas/traer/{id}
+
+- **Descripción:** Obtiene los detalles de una venta específica mediante su ID.
+- **Ejemplo de URL:** `localhost:444/ventas-service/ventas/traer/1` _(Reemplaza el "1" por el ID de la venta)_
+
+4. `PUT` /ventas-service/ventas/editar/{id}
+
+- **Descripción:** Edita una venta existente.
+- **Body:**
+json
+Copiar código
+{
+  "fechaVenta": "2023-01-09",
+  "idCarrito": 2
+}
+- **Ejemplo de URL:** `localhost:444/ventas-service/ventas/editar/1` _(Reemplaza el "1" por el ID de la venta)_
+
+5. `DELETE` /ventas-service/ventas/borrar/{id}
+
+- **Descripción:** Elimina una venta mediante su ID.
+- **Ejemplo de URL:** `localhost:444/ventas-service/ventas/borrar/1` _(Reemplaza el "1" por el ID de la venta)_
 
 
