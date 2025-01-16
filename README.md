@@ -46,6 +46,22 @@ Este es un proyecto basado en microservicios, desarrollado en Java, que simula u
 - _**Postman:**_ Para pruebas de los endpoints.
 - _**Docker:**_ Para la simulación de despliegue y contenedores.
 
+## Diagrama de FLujo
+
+![Diagrama de flujo](./zrecursos/Sistema%20Tienda%20electrodomésticos.png)
+
+### Explicación
+
+- **API Gateway:** Recibe las peticiones del usuario y las distribuye a los microservicios correspondientes.
+- **Eureka Server:** Se encarga de conocer la ubicación de todos los microservicios registrados, lo que permite a la API Gateway redirigir correctamente las peticiones.
+- **Load Balancer:** 
+  -- Consulta Eureka Server para saber qué instancias del microservicio están disponibles.
+  -- Selecciona una instancia para manejar la solicitud, distribuyendo la carga.
+- **Microservicios:** Procesan la solicitud asignada por el load balancer e interactúan con la base de datos MySQL.
+- **Circuit Breaker** Lo utilizan los microservicios que consultan a otros, para manejar posibles fallos.
+- **Base de Datos MySQL:** Cada microservicio cuenta con su base de datos para almacenar sus datos correspondinetes.
+- **Config Server:** Proporciona una visión unificada de la configuración y una forma eficiente de gestionar actualizaciones en nuestros microservicios.
+
 ## Endpoints del Proyecto:
 
 #### Nota:
