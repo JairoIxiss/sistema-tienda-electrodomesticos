@@ -234,7 +234,7 @@ Este proyecto está configurado para ser desplegado utilizando Docker. Docker pe
 `docker-compose up`
 
 <div align="justify">
-El archivo 'docker-compose.yml' está configurado para ejecutar varios contenedores que representan cada microservicio. Como también la creación de cada base de datos que utiliza cada microservicio. 
+El archivo 'docker-compose.yml' está configurado para ejecutar varias imágenes que representan cada microservicio. Como también la creación de cada base de datos que utiliza cada microservicio. 
 </div>
 
 
