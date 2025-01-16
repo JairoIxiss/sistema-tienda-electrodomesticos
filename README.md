@@ -72,7 +72,7 @@ donde `{nombre-del-microservicio}` puede ser:
 1. `POST` /producto-service/productos/crear
 - **Descripción:** Crea un nuevo producto en la tienda.
 - **Body:**
-![Texto alternativo](./zrecursos/body-producto.png)
+![Body para crear producto](./zrecursos/body-producto.png)
 - **Ejemplo de URL:** `localhost:444/producto-service/productos/crear`
 
 2. `GET` /producto-service/productos/traer
@@ -82,12 +82,13 @@ donde `{nombre-del-microservicio}` puede ser:
 3. `GET` /producto-service/productos/traer/{id}
 
 - **Descripción:** Obtiene los detalles de un producto específico mediante su código.
-- **Ejemplo de URL:** `localhost:444/producto-service/productos/traer/2` _(Reemplaza el "2" por el código del producto deseado)_
+- **Ejemplo de URL:** `localhost:444/producto-service/productos/traer/1` _(Reemplaza el "1" por el código del producto deseado)_
 
 4. `PUT` /producto-service/productos/editar/{id}
 
 - **Descripción:** Edita los detalles de un producto existente.
 - **Body:**
+![Body para editar producto](./zrecursos/body-producto-editar.png)
 - **Ejemplo de URL:** `localhost:444/producto-service/productos/editar/1` _(Reemplaza el "1" por el ID del producto)_
 
 5. `DELETE` /producto-service/productos/borrar/{id}
@@ -101,11 +102,7 @@ donde `{nombre-del-microservicio}` puede ser:
 
 - **Descripción:** Crea un carrito de compras con los productos seleccionados.
 - **Body:**
-json
-Copiar código
-{
-  "codigos": [1, 2]
-}
+![Body para crear carrito](./zrecursos/body-carrito.png)
 - **Ejemplo de URL:** `localhost:444/carrito-service/carrito/crear`
 
 2. `GET` /carrito-service/carrito/traer-todos
@@ -122,11 +119,7 @@ Copiar código
 
 - **Descripción:** Edita un carrito de compras existente.
 - **Body:**
-json
-Copiar código
-{
-  "codigos": [1]
-}
+![Body para editar carrito](./zrecursos/body-carrito-editar.png)
 - **Ejemplo de URL:** `localhost:444/carrito-service/carrito/editar/1` _(Reemplaza el "1" por el ID del carrito)_
 
 5. `DELETE` /carrito-service/carrito/borrar/{id}
@@ -140,12 +133,7 @@ Copiar código
 
 - **Descripción:** Crea una nueva venta, asociada a un carrito de compras.
 - **Body:**
-json
-Copiar código
-{
-  "fechaVenta": "2025-01-10",
-  "idCarrito": 1
-}
+![Body para crear venta](./zrecursos/body-venta.png)
 - **Ejemplo de URL:** `localhost:444/ventas-service/ventas/crear`
 
 2. `GET` /ventas-service/ventas/traer
@@ -162,12 +150,7 @@ Copiar código
 
 - **Descripción:** Edita una venta existente.
 - **Body:**
-json
-Copiar código
-{
-  "fechaVenta": "2023-01-09",
-  "idCarrito": 2
-}
+![Body para editar venta](./zrecursos/body-venta-editar.png)
 - **Ejemplo de URL:** `localhost:444/ventas-service/ventas/editar/1` _(Reemplaza el "1" por el ID de la venta)_
 
 5. `DELETE` /ventas-service/ventas/borrar/{id}
@@ -175,4 +158,8 @@ Copiar código
 - **Descripción:** Elimina una venta mediante su ID.
 - **Ejemplo de URL:** `localhost:444/ventas-service/ventas/borrar/1` _(Reemplaza el "1" por el ID de la venta)_
 
+## Detalles Técnicos
 
+- **Escalabilidad:** El proyecto está preparado para escalar horizontalmente utilizando un balanceador de carga.
+- **Tolerancia a fallos:** Resilience4j está implementado para manejar caídas en los servicios con estrategias de Circuit Breaker y Retry.
+- **Centralización de Configuraciones:** Utilizamos Config Server para centralizar las configuraciones de los microservicios.
