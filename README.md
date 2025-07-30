@@ -6,6 +6,7 @@
 ## Descripción del Proyecto:
 <div align="justify">
 Este es un proyecto basado en microservicios, desarrollado en Java, que simula una tienda de electrodomésticos en línea. La arquitectura se compone de tres microservicios principales: Producto, Carrito de Compras, y Ventas. Utiliza Spring Boot para la creación de microservicios, con funcionalidades como descubrimiento de servicios, enrutamiento, balanceo de carga, tolerancia a fallos y centralización de configuraciones.
+Video de mostrativo: https://youtu.be/gwJ94xs4hvc
 </div>
 
 ## Funcionalidades Principales:
